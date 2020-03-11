@@ -41,7 +41,7 @@ def last_n_weeks_selected(path_to_dataframe_in_csv, date_column_name, normalized
     finish_index_of_data_frame_selected = data_frame.loc[
         data_frame[date_column_name].dt.day_name() == 'Sunday'].last_valid_index()
 
-    data_frame_selected = data_frame.loc[(data_frame.index >= start_index_of_data_frame_selected) & (data_frame.index <= finish_index_of_data_frame_selected)].copy()
+    data_frame_selected = data_frame.loc[(data_frame.index >= start_index_of_data_frame_selected) & (data_frame.index < finish_index_of_data_frame_selected)].copy()
 
     data_frame_selected_with_normalized_date = date_to_seconds(data_frame_selected, date_column_name, normalized_date_column_name,
                                  unit_of_time='weeks')
@@ -83,7 +83,7 @@ def last_n_weeks_selected(path_to_dataframe_in_csv, date_column_name, normalized
     #print(df_grouped_by_column_for_analysis_week.columns)
 
     marker_list = df_grouped_by_column_for_analysis_and_week.columns[1:len(df_grouped_by_column_for_analysis_and_week.columns)]
-    
+
 
     df_grouped_by_column_for_analysis_and_week['Total'] = df_grouped_by_column_for_analysis_and_week[
         marker_list].sum(axis=1)
